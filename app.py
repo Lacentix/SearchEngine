@@ -1,12 +1,14 @@
 import os
 from flask import Flask, render_template
+import pyterrier as pt
 
 java_home = os.environ.get('JAVA_HOME')
 
 if java_home is None:
     raise EnvironmentError("JAVA_HOME environment variable is not set")
 
-os.environ["JAVA_HOME"] = java_home
+if not pt.started():
+    pt.init()
 
 app = Flask(__name__)
 
